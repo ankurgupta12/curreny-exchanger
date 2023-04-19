@@ -31,21 +31,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.currencyService
-      .getSymbol()
-      .pipe(takeUntil(this.componentDestroyed))
-      .subscribe({
-        next: (res) => {
-          this.currencyData = Object.keys(res.symbols).map((val) => ({
-            val: val,
-            key: val,
-          }));
-          console.log(this.currencyData, 'this.currencyData');
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
+    this.getSymbol();
   }
   /**
    * Convert the value from and to currency
@@ -72,5 +58,27 @@ export class HomeComponent extends BaseComponent implements OnInit {
     let tempVal = this.formData?.toCurrency;
     this.formData.toCurrency = this.formData?.fromCurrency;
     this.formData.fromCurrency = tempVal;
+    this.convert();
+  }
+
+  /**
+   * Get Symbol data for all currency
+   */
+  private getSymbol(): void {
+    this.currencyService
+      .getSymbol()
+      .pipe(takeUntil(this.componentDestroyed))
+      .subscribe({
+        next: (res) => {
+          this.currencyData = Object.keys(res.symbols).map((val) => ({
+            val: val,
+            key: val,
+          }));
+          console.log(this.currencyData, 'this.currencyData');
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 }
