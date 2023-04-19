@@ -5,11 +5,12 @@ export interface ISymbol {
 export interface FormDataVal {
   toCurrency: ICurrency;
   fromCurrency: ICurrency;
-  amount: number | null | undefined;
+  amount: number;
 }
 export interface ICurrency {
   val: string;
   key: string;
+  title?: string;
 }
 export interface IConvertData {
   success: boolean;

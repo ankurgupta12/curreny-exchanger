@@ -1,42 +1,45 @@
+@import "./../../../assets/scss/variables";
 .main-section {
-  border: 1px solid red;
+  border: 1px solid $red;
   height: 200px;
 }
 
 .some-page-wrapper {
   margin: 15px;
-}
-
-.row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
 }
 
-.column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
+.row {
+  width: 33.2rem;
   height: 100px;
-  border: 1px solid white;
-  background-color: gray;
+  border: 1px solid $white;
+  background-color: $darkgray;
   margin: 10px;
   border-radius: 10px;
 }
-
-// .orange-column {
-//   background-color: orange;
-//   height: 100px;
-// }
-
-// .blue-column {
-//   background-color: blue;
-//   height: 100px;
-// }
-
-// .green-column {
-//   background-color: green;
-//   height: 100px;
-// }
+.column {
+  text-align: center;
+}
+.active {
+  background-color: $blue;
+  color: $white;
+  font-size: 13px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  border-radius: 4px;
+  border: 1px solid #2a2c2a;
+  box-shadow: 2px 2px 7px 1px $lightBlue;
+  cursor: pointer;
+  margin-left: 20px;
+}
+a {
+  float: left;
+  color: $black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}

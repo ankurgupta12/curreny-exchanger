@@ -63,9 +63,9 @@ export class CurrencyService {
    * @param to For which need to fetch
    * @returns rates
    */
-  public getLatest(from: ICurrency, to: ICurrency): Observable<any> {
+  public getLatest(from: ICurrency, to: string): Observable<any> {
     return this.http.get(
-      `${environment.BASE_URL}latest?base=${from}&symbols=${to}`,
+      `${environment.BASE_URL}latest?base=${from.val}&symbols=${to}`,
       {
         headers: {
           apikey: environment.ACCESS_KEY,

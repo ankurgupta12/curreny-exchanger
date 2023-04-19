@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { takeUntil } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { forkJoin, of, takeUntil } from 'rxjs';
 import { EUR, USD } from 'src/core/constant/currency.constant';
+import { GRID } from 'src/core/constant/global.constant';
 import { ICONS } from 'src/core/constant/icon.constant';
 import {
   ICurrency,
@@ -14,71 +16,38 @@ import { BaseComponent } from 'src/shared/components/base.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent extends BaseComponent implements OnInit {
-  public currencyData: ICurrency[] = [];
-  public convertedValue: string = '';
+export class HomeComponent extends BaseComponent implements OnInit, OnDestroy {
   public defualtFrom = EUR;
-  public ICONS = ICONS;
   public defualtTo = USD;
   public formData: FormDataVal = {
     fromCurrency: { key: EUR, val: EUR },
     toCurrency: { key: USD, val: USD },
-    amount: undefined,
+    amount: NaN,
   };
-  public basePrice: string = '';
-  constructor(private currencyService: CurrencyService) {
+  public latestCurrency = new Array(GRID.LENGTH).fill({
+    currencyName: '',
+    basePrice: null,
+  });
+  constructor(
+    private currencyService: CurrencyService,
+    private router: Router
+  ) {
     super();
   }
 
-  public ngOnInit(): void {
-    this.getSymbol();
-  }
-  /**
-   * Convert the value from and to currency
-   */
-  public convert(): void {
-    this.currencyService
-      .convertCurrency(this.formData)
-      .pipe(takeUntil(this.componentDestroyed))
-      .subscribe({
-        next: (res) => {
-          this.basePrice = `1.00${res.query.from}=${res.info.rate}${res.query.to}`;
-          this.convertedValue = `${res.result}${res.query.to}`;
-          console.log(res);
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
-  }
-  /**
-   * Method to swap the values
-   */
-  public swapValues() {
-    let tempVal = this.formData?.toCurrency;
-    this.formData.toCurrency = this.formData?.fromCurrency;
-    this.formData.fromCurrency = tempVal;
-    this.convert();
-  }
+  public ngOnInit(): void {}
 
   /**
-   * Get Symbol data for all currency
+   * Redirect to details page
    */
-  private getSymbol(): void {
-    this.currencyService
-      .getSymbol()
-      .pipe(takeUntil(this.componentDestroyed))
-      .subscribe({
-        next: (res) => {
-          this.currencyData = Object.keys(res.symbols).map((val) => ({
-            val: val,
-            key: val,
-          }));
-          console.log(this.currencyData, 'this.currencyData');
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
+  public redirectToDetail(): void {
+    this.router.navigateByUrl('/detail', {
+      state: this.formData,
+    });
+  }
+
+  public override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.formData = null as unknown as FormDataVal;
   }
 }

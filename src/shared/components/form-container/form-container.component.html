@@ -1,0 +1,30 @@
+<div>
+    <label>Amount</label>
+    <input type="number" min="1" [(ngModel)]="formConfig && formConfig.amount" />
+    <label>From</label>
+    <select [(ngModel)]="formConfig && formConfig.fromCurrency.val">
+      <option
+        *ngFor="let currency of currencyData"
+        [value]="currency.val"
+        [selected]="defualtFrom === currency.val"
+      >
+        {{ currency.key }}
+      </option>
+    </select>
+    <img [src]="ICONS.swap" (click)="swapValues()" />
+    <label>TO</label>
+    <select [(ngModel)]="formConfig && formConfig.toCurrency.val">
+      <option
+        *ngFor="let currency of currencyData"
+        [value]="currency.val"
+        [selected]="defualtTo === currency.val"
+      >
+        {{ currency.key }}
+      </option>
+    </select>
+  </div>
+  <button [disabled]="!formConfig.amount" (click)="convert()">Convert</button>
+<div>
+  <span>{{ convertedValue }}</span>
+  <span>{{ basePrice }}</span>
+</div>
