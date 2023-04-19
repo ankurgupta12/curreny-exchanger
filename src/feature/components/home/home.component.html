@@ -13,6 +13,7 @@
         {{ currency.key }}
       </option>
     </select>
+    <img [src]="ICONS.swap" (click)="swapValues()">
     <label>TO</label>
     <select [(ngModel)]="formData && formData.toCurrency.val">
       <option
@@ -28,6 +29,7 @@
 </div>
 <div>
   <span>{{convertedValue}}</span>
+  <span>{{basePrice}}</span>
 </div>
 <div class="some-page-wrapper">
   <div class="row">

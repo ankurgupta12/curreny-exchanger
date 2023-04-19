@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import {
+  FormDataVal,
   IConvertData,
   ICurrency,
   ISymbol,
@@ -42,13 +43,13 @@ export class CurrencyService {
    * @param to to currency
    * @param amount value to which need to convert
    */
-  public convertCurrency(
-    from: ICurrency,
-    to: ICurrency,
-    amount: number | null | undefined
-  ): Observable<IConvertData> {
+  public convertCurrency({
+    fromCurrency,
+    toCurrency,
+    amount,
+  }: FormDataVal): Observable<IConvertData> {
     return this.http.get(
-      `${environment.BASE_URL}convert?amount=${amount}&to=${to.val}&from=${from.val}`,
+      `${environment.BASE_URL}convert?amount=${amount}&to=${toCurrency.val}&from=${fromCurrency.val}`,
       {
         headers: {
           apikey: environment.ACCESS_KEY,
@@ -56,7 +57,12 @@ export class CurrencyService {
       }
     ) as Observable<IConvertData>;
   }
-
+  /**
+   * Method to use the latest rated based on the base currency
+   * @param from base Currency
+   * @param to For which need to fetch
+   * @returns rates
+   */
   public getLatest(from: ICurrency, to: ICurrency): Observable<any> {
     return this.http.get(
       `${environment.BASE_URL}latest?base=${from}&symbols=${to}`,
@@ -65,6 +71,6 @@ export class CurrencyService {
           apikey: environment.ACCESS_KEY,
         },
       }
-    ) as Observable<IConvertData>;
+    );
   }
 }

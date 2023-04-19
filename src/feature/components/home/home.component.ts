@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { EUR, USD } from 'src/core/constant/currency.constant';
+import { ICONS } from 'src/core/constant/icon.constant';
 import {
   ICurrency,
   FormDataVal,
@@ -14,18 +15,20 @@ import { BaseComponent } from 'src/shared/components/base.component';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent extends BaseComponent implements OnInit {
-  constructor(private currencyService: CurrencyService) {
-    super();
-  }
   public currencyData: ICurrency[] = [];
   public convertedValue: string = '';
   public defualtFrom = EUR;
+  public ICONS = ICONS;
   public defualtTo = USD;
   public formData: FormDataVal = {
     fromCurrency: { key: EUR, val: EUR },
     toCurrency: { key: USD, val: USD },
     amount: undefined,
   };
+  public basePrice: string = '';
+  constructor(private currencyService: CurrencyService) {
+    super();
+  }
 
   public ngOnInit(): void {
     this.currencyService
@@ -49,14 +52,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
    */
   public convert(): void {
     this.currencyService
-      .convertCurrency(
-        this.formData?.fromCurrency,
-        this.formData?.toCurrency,
-        this.formData?.amount
-      )
+      .convertCurrency(this.formData)
       .pipe(takeUntil(this.componentDestroyed))
       .subscribe({
         next: (res) => {
+          this.basePrice = `1.00${res.query.from}=${res.info.rate}${res.query.to}`;
           this.convertedValue = `${res.result}${res.query.to}`;
           console.log(res);
         },
@@ -64,5 +64,13 @@ export class HomeComponent extends BaseComponent implements OnInit {
           console.log(error);
         },
       });
+  }
+  /**
+   * Method to swap the values
+   */
+  public swapValues() {
+    let tempVal = this.formData?.toCurrency;
+    this.formData.toCurrency = this.formData?.fromCurrency;
+    this.formData.fromCurrency = tempVal;
   }
 }
