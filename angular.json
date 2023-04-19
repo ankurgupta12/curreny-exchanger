@@ -56,13 +56,20 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+           "options": {"proxyConfig": "src/proxy.conf.json"},
           "configurations": {
             "production": {
               "browserTarget": "curreny-exchanger:build:production"
@@ -100,5 +107,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "08a78898-ba75-4b72-a62a-d472738c407b"
   }
 }

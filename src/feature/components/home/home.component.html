@@ -1,0 +1,66 @@
+<h3>Currency Exchanger</h3>
+<div class="main-section">
+  <div>
+    <label>Amount</label>
+    <input type="number" min="1" [(ngModel)]="formData && formData.amount"/>
+    <label>From</label>
+    <select [(ngModel)]="formData && formData.fromCurrency.val">
+      <option
+        *ngFor="let currency of currencyData"
+        [value]="currency.val"
+        [selected]="defualtFrom === currency.val"
+      >
+        {{ currency.key }}
+      </option>
+    </select>
+    <label>TO</label>
+    <select [(ngModel)]="formData && formData.toCurrency.val">
+      <option
+        *ngFor="let currency of currencyData"
+        [value]="currency.val"
+        [selected]="defualtTo === currency.val"
+      >
+        {{ currency.key }}
+      </option>
+    </select>
+  </div>
+  <button (click)="convert()">Convert</button>
+</div>
+<div>
+  <span>{{convertedValue}}</span>
+</div>
+<div class="some-page-wrapper">
+  <div class="row">
+    <div class="column">
+      <span> Some Text in Row 2, Column One</span>
+    </div>
+    <div class="column">
+      <span> Some Text in Row 2, Column One</span>
+    </div>
+    <div class="column">
+      <span> Some Text in Row 2, Column One</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <span> Some Text in Row 2, Column One</span>
+    </div>
+    <div class="column">
+      <span> Some Text in Row 2, Column One</span>
+    </div>
+    <div class="column">
+      <span> Some Text in Row 2, Column One</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <span> Some Text in Row 2, Column One</span>
+    </div>
+    <div class="column">
+      <span> Some Text in Row 2, Column One</span>
+    </div>
+    <div class="column">
+      <span> Some Text in Row 2, Column One</span>
+    </div>
+  </div>
+</div>
