@@ -1,14 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { forkJoin, of, takeUntil } from 'rxjs';
 import { EUR, USD } from 'src/core/constant/currency.constant';
 import { GRID } from 'src/core/constant/global.constant';
 import { ICONS } from 'src/core/constant/icon.constant';
-import {
-  ICurrency,
-  FormDataVal,
-} from 'src/core/interfaces/icurrency.interface';
-import { CurrencyService } from 'src/core/services/currency.service';
+import { FormDataVal } from 'src/core/interfaces/icurrency.interface';
 import { BaseComponent } from 'src/shared/components/base.component';
 
 @Component({
@@ -28,10 +23,7 @@ export class HomeComponent extends BaseComponent implements OnInit, OnDestroy {
     currencyName: '',
     basePrice: null,
   });
-  constructor(
-    private currencyService: CurrencyService,
-    private router: Router
-  ) {
+  constructor(private router: Router) {
     super();
   }
 

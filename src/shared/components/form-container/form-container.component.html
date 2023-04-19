@@ -23,7 +23,7 @@
       </option>
     </select>
   </div>
-  <button [disabled]="!formConfig.amount" (click)="convert()">Convert</button>
+  <button [disabled]="!formConfig?.amount" (click)="convert()">Convert</button>
 <div>
   <span>{{ convertedValue }}</span>
   <span>{{ basePrice }}</span>
