@@ -1,7 +1,11 @@
 # CurrenyExchanger
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.It is tool to show the currency exchange rate. User Can see the
+currency information and detail information. 
 
+## Tools
+ ESLint, Prettier.
+ 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
