@@ -108,6 +108,7 @@ export class FormContainerComponent extends BaseComponent implements OnInit {
         takeUntil(this.componentDestroyed),
         finalize(() => {
           this.showLoader = false;
+          this.cdr.detectChanges();
         })
       )
       .subscribe({

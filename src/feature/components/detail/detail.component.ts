@@ -12,7 +12,7 @@ import { BaseComponent } from 'src/shared/components/base.component';
   styleUrls: ['./detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailComponent extends BaseComponent implements OnInit {
+export class DetailComponent extends BaseComponent {
   public formConfig: FormDataVal;
   public title = '';
   public basePrice: any;
@@ -22,11 +22,7 @@ export class DetailComponent extends BaseComponent implements OnInit {
     super();
     this.formConfig = this.router.getCurrentNavigation()?.extras
       .state as FormDataVal;
-    console.log(this.formConfig);
-    // this.formConfig.isDisableToDropdown = true;
-    console.log(this.formConfig);
   }
-  public ngOnInit(): void {}
   /**
    * To show the title
    * @param currencyList CurrencyList
