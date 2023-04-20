@@ -31,6 +31,14 @@
   box-shadow: 2px 2px 7px 1px $lightBlue;
   cursor: pointer;
   margin-left: 20px;
+  &.more-detail {
+    width: 9%;
+    margin-top: -59px;
+    margin-right: 413px;
+    height: 55px;
+    position: relative;
+    float: right;
+  }
 }
 a {
   text-align: center;

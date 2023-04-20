@@ -34,7 +34,10 @@ export class HomeComponent extends BaseComponent implements OnDestroy {
       state: { ...this.formData, isDisableToDropdown: true },
     });
   }
-
+  /**
+   * Method to show top 9 currency
+   * @param $event response from the Api for latest currency
+   */
   public getLatestCurrency($event: any) {
     const ratesKeys = Object.keys($event.rates);
     this.latestCurrency = this.latestCurrency.map((res, index) => {

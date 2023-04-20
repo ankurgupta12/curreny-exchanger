@@ -2,9 +2,7 @@
 <div class="main-section">
   <app-form-container (latestCurrencyList)="getLatestCurrency($event)" [formConfig]="formData"></app-form-container>
 </div>
-<div>
-  <a class="active" (click)="redirectToDetail()">More Details</a>
-</div>
+<button class="active more-detail" (click)="redirectToDetail()">More Details</button>
 <div class="some-page-wrapper" *ngIf="latestCurrency.length">
   <div class="row" *ngFor="let currency of latestCurrency">
     <div class="column">
