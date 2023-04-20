@@ -19,23 +19,11 @@ export class CurrencyService {
    * @returns
    */
   public getSymbol(): Observable<ISymbol> {
-    return of({
-      success: true,
-      symbols: {
-        AED: 'United Arab Emirates Dirham',
-        AFN: 'Afghan Afghani',
-        ALL: 'Albanian Lek',
-        AMD: 'Armenian Dram',
-        ANG: 'Netherlands Antillean Guilder',
-        AOA: 'Angolan Kwanza',
-        USD: 'United States Dollar',
-        EUR: 'Euro',
+    return this.http.get<ISymbol>(`${environment.BASE_URL}symbols`, {
+      headers: {
+        apikey: environment.ACCESS_KEY,
       },
     });
-    // return this.http.get(`${environment.BASE_URL}symbols`, {
-    //   headers: {
-    //   apikey: environment.ACCESS_KEY},
-    // });
   }
   /**
    * This method is used to convert the value from currency into to currency

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { EUR, USD } from 'src/core/constant/currency.constant';
 import { GRID } from 'src/core/constant/global.constant';
@@ -11,7 +11,7 @@ import { BaseComponent } from 'src/shared/components/base.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent extends BaseComponent implements OnInit, OnDestroy {
+export class HomeComponent extends BaseComponent implements OnDestroy {
   public defualtFrom = EUR;
   public defualtTo = USD;
   public formData: FormDataVal = {
@@ -20,15 +20,10 @@ export class HomeComponent extends BaseComponent implements OnInit, OnDestroy {
     amount: NaN,
     isDisableToDropdown: false,
   };
-  public latestCurrency = new Array(GRID.LENGTH).fill({
-    currencyName: '',
-    basePrice: null,
-  });
+  public latestCurrency = new Array(GRID.LENGTH).fill(null);
   constructor(private router: Router) {
     super();
   }
-
-  public ngOnInit(): void {}
 
   /**
    * Redirect to details page
@@ -37,6 +32,21 @@ export class HomeComponent extends BaseComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/detail', {
       state: { ...this.formData, isDisableToDropdown: true },
     });
+  }
+
+  public getLatestCurrency($event: any) {
+    const ratesKeys = Object.keys($event.rates);
+    this.latestCurrency = this.latestCurrency.map((res, index) => {
+      const val = { currencyName: '', basePrice: '' };
+      val.currencyName = ratesKeys[index];
+      val.basePrice = $event.rates[val.currencyName];
+      return val;
+    });
+    console.log(this.latestCurrency);
+  }
+
+  public calculatePrice(currency: any) {
+    return currency?.basePrice * this.formData?.amount;
   }
 
   public override ngOnDestroy(): void {

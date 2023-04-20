@@ -31,17 +31,16 @@ export class FormContainerComponent extends BaseComponent implements OnInit {
 
   @Output()
   public currencyList: EventEmitter<ICurrency[]> = new EventEmitter();
+  @Output()
+  public latestCurrencyList: EventEmitter<any> = new EventEmitter();
 
   public defualtFrom = EUR;
+  public showLoader = true;
   public ICONS = ICONS;
   public defualtTo = USD;
   public currencyData: ICurrency[] = [];
   public basePrice = '';
   public convertedValue = '';
-  public latestCurrency = new Array(GRID.LENGTH).fill({
-    currencyName: '',
-    basePrice: null,
-  });
   public constructor(
     private currencyService: CurrencyService,
     private cdr: ChangeDetectorRef
@@ -66,6 +65,7 @@ export class FormContainerComponent extends BaseComponent implements OnInit {
    * Convert the value from and to currency
    */
   public convert(): void {
+    this.showLoader = true;
     const convertCurrency$ = this.currencyService.convertCurrency(
       this.formConfig
     );
@@ -78,19 +78,18 @@ export class FormContainerComponent extends BaseComponent implements OnInit {
         takeUntil(this.componentDestroyed),
         finalize(() => {
           this.cdr.detectChanges();
+          this.showLoader = false;
         })
       )
       .subscribe({
-        next: (res) => {
-          const convertedValue = res[0];
-          this.basePrice = `1.00${convertedValue.query.from}=${convertedValue.info.rate}${convertedValue.query.to}`;
+        next: (response) => {
+          const convertedValue = response[0];
+          this.basePrice =
+            convertedValue &&
+            `1.00${convertedValue.query.from}=${convertedValue.info.rate}${convertedValue.query.to}`;
           this.convertedValue = `${convertedValue.result}${convertedValue.query.to}`;
-          console.log(res);
-          const ratesKeys = Object.keys(res[1].rates);
-          this.latestCurrency.forEach((res, index) => {
-            res.currencyName = ratesKeys[index];
-            res.basePrice = res[1]?.rates[res.currencyName];
-          });
+          console.log(response);
+          this.latestCurrencyList.next(response[1]);
         },
         error: (error) => {
           console.log(error);
@@ -102,9 +101,15 @@ export class FormContainerComponent extends BaseComponent implements OnInit {
    * Get Symbol data for all currency
    */
   private getSymbol(): void {
+    this.showLoader = true;
     this.currencyService
       .getSymbol()
-      .pipe(takeUntil(this.componentDestroyed))
+      .pipe(
+        takeUntil(this.componentDestroyed),
+        finalize(() => {
+          this.showLoader = false;
+        })
+      )
       .subscribe({
         next: (res) => {
           this.currencyData = Object.keys(res.symbols).map((val) => ({

@@ -1,17 +1,18 @@
-<h3>Currency Exchanger</h3>
+<div class="container"><h3>Currency Exchanger</h3>
 <div class="main-section">
-  <app-form-container [formConfig]="formData"></app-form-container>
+  <app-form-container (latestCurrencyList)="getLatestCurrency($event)" [formConfig]="formData"></app-form-container>
 </div>
 <div>
   <a class="active" (click)="redirectToDetail()">More Details</a>
 </div>
-<div class="some-page-wrapper">
+<div class="some-page-wrapper" *ngIf="latestCurrency.length">
   <div class="row" *ngFor="let currency of latestCurrency">
     <div class="column">
       <span *ngIf="currency?.basePrice && formData && formData?.amount"
-        >{{ currency?.basePrice * formData.amount
-        }} {{ currency.currencyName }}
+        >{{ calculatePrice(currency)
+        }} {{ currency?.currencyName }}
       </span>
     </div>
   </div>
+</div>
 </div>

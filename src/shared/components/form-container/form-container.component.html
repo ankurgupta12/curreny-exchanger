@@ -1,30 +1,67 @@
-<div *ngIf="formConfig">
+<div id="cover-spin" *ngIf="showLoader" ></div>
+<div *ngIf="formConfig" class="form-container">
+  <div class="form-left">
     <label>Amount</label>
-    <input type="number" min="1" [(ngModel)]="formConfig && formConfig.amount" />
-    <label>From</label>
-    <select [disabled]="isDisabled" [(ngModel)]="formConfig && formConfig.fromCurrency.val">
-      <option
-        *ngFor="let currency of currencyData"
-        [value]="currency.val"
-        [selected]="defualtFrom === currency.val"
-      >
-        {{ currency.key }}
-      </option>
-    </select>
-    <img [src]="ICONS.swap" (click)="swapValues()" />
-    <label>TO</label>
-    <select  [(ngModel)]="formConfig && formConfig.toCurrency.val">
-      <option
-        *ngFor="let currency of currencyData"
-        [value]="currency.val"
-        [selected]="defualtTo === currency.val"
-      >
-        {{ currency.key }}
-      </option>
-    </select>
+    <input
+      type="number"
+      min="1"
+      [(ngModel)]="formConfig && formConfig.amount"
+    />
   </div>
-  <button [disabled]="!formConfig?.amount" (click)="convert()">Convert</button>
-<div>
-  <span>{{ convertedValue }}</span>
-  <span>{{ basePrice }}</span>
+  <div class="form-right">
+    <div class="form-val">
+      <label>From</label>
+      <select
+        class="form-dropdown"
+        [disabled]="isDisabled"
+        [(ngModel)]="formConfig && formConfig.fromCurrency.val"
+      >
+        <option
+          *ngFor="let currency of currencyData"
+          [value]="currency.val"
+          [selected]="defualtFrom === currency.val"
+        >
+          {{ currency.key }}
+        </option>
+      </select>
+    </div>
+    <div class="form-val swap-icon">
+      <img [src]="ICONS.swap" (click)="swapValues()" />
+      <!-- <svg></svg>
+      <svg id="swapIcon" class="swapIcon"><path fill-rule="evenodd" d="M3.73236062,10.8715503 L13.0322567,10.8715503 L13.0322567,12.0771722 L3.73236062,12.0771722 L5.78865676,14.1334683 L4.93615334,14.9859717 L1.44437216,11.4941905 L1.46420147,11.4743612 L1.44437216,11.4545319 L4.93615334,7.96275075 L5.78865676,8.81525416 L3.73236062,10.8715503 Z M12.3264209,3.98599171 L10.1833578,1.84292866 L11.0126403,1.01364616 L13.725446,3.7264518 L13.7271743,3.72472345 L14.5564568,4.55400595 L14.5547285,4.5557343 L14.5564568,4.55746265 L13.7271743,5.38674515 L13.725446,5.3850168 L11.0126403,8.09782244 L10.1833578,7.26853994 L12.2931235,5.15877427 L2.55601282,5.15877427 L2.55601282,3.98599171 L12.3264209,3.98599171 Z" transform="rotate(0 8 8)"></path></svg> -->
+    </div>
+    <div class="form-val">
+      <label>TO</label>
+      <select
+        class="form-dropdown"
+        [(ngModel)]="formConfig && formConfig.toCurrency.val"
+      >
+        <option
+          *ngFor="let currency of currencyData"
+          [value]="currency.val"
+          [selected]="defualtTo === currency.val"
+        >
+          {{ currency.key }}
+        </option>
+      </select>
+    </div>
+  </div>
 </div>
+<div class="form-container">
+  <div class="form-left">
+    <span class="convt-val">{{ convertedValue }}</span>
+  </div>
+  <div class="form-right">
+      <button class="convert-btn active" [disabled]="!formConfig?.amount" (click)="convert()">
+      Convert
+    </button>
+    <div>
+    <span class="converted-value">{{ convertedValue }}</span>
+    <button class="btn-more-details" *ngIf="isDisabled" (click)="convert()">
+      More Details
+    </button>
+  </div>
+    
+  </div>
+</div>
+
