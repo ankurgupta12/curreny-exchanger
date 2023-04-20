@@ -29,6 +29,7 @@ export class HomeComponent extends BaseComponent implements OnDestroy {
    * Redirect to details page
    */
   public redirectToDetail(): void {
+    console.log('Details');
     this.router.navigateByUrl('/detail', {
       state: { ...this.formData, isDisableToDropdown: true },
     });
