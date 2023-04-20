@@ -18,6 +18,7 @@ export class HomeComponent extends BaseComponent implements OnInit, OnDestroy {
     fromCurrency: { key: EUR, val: EUR },
     toCurrency: { key: USD, val: USD },
     amount: NaN,
+    isDisableToDropdown: false,
   };
   public latestCurrency = new Array(GRID.LENGTH).fill({
     currencyName: '',
@@ -34,7 +35,7 @@ export class HomeComponent extends BaseComponent implements OnInit, OnDestroy {
    */
   public redirectToDetail(): void {
     this.router.navigateByUrl('/detail', {
-      state: this.formData,
+      state: { ...this.formData, isDisableToDropdown: true },
     });
   }
 

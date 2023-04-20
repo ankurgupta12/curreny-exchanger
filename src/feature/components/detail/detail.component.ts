@@ -23,6 +23,8 @@ export class DetailComponent extends BaseComponent implements OnInit {
     this.formConfig = this.router.getCurrentNavigation()?.extras
       .state as FormDataVal;
     console.log(this.formConfig);
+    // this.formConfig.isDisableToDropdown = true;
+    console.log(this.formConfig);
   }
   public ngOnInit(): void {}
   /**

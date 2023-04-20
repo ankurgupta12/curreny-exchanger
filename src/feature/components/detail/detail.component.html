@@ -1,5 +1,5 @@
 <div>
     <header>{{title}} </header>
     <button routerLink="">Back to Home</button>
-   <app-form-container [formConfig]="formConfig" (currencyList)="getCurrency($event)" ></app-form-container>
+   <app-form-container [formConfig]="formConfig" [isDisabled]="true" (currencyList)="getCurrency($event)" ></app-form-container>
 </div>

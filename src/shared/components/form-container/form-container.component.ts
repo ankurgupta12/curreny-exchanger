@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   OnInit,
+  Optional,
   Output,
 } from '@angular/core';
 import { finalize, forkJoin, takeUntil } from 'rxjs';
@@ -26,6 +27,8 @@ export class FormContainerComponent extends BaseComponent implements OnInit {
   // input config for the form container
   @Input()
   public formConfig!: FormDataVal;
+  @Input() @Optional() public isDisabled = false;
+
   @Output()
   public currencyList: EventEmitter<ICurrency[]> = new EventEmitter();
 

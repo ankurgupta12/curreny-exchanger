@@ -1,8 +1,8 @@
-<div>
+<div *ngIf="formConfig">
     <label>Amount</label>
     <input type="number" min="1" [(ngModel)]="formConfig && formConfig.amount" />
     <label>From</label>
-    <select [(ngModel)]="formConfig && formConfig.fromCurrency.val">
+    <select [disabled]="isDisabled" [(ngModel)]="formConfig && formConfig.fromCurrency.val">
       <option
         *ngFor="let currency of currencyData"
         [value]="currency.val"
@@ -13,7 +13,7 @@
     </select>
     <img [src]="ICONS.swap" (click)="swapValues()" />
     <label>TO</label>
-    <select [(ngModel)]="formConfig && formConfig.toCurrency.val">
+    <select  [(ngModel)]="formConfig && formConfig.toCurrency.val">
       <option
         *ngFor="let currency of currencyData"
         [value]="currency.val"

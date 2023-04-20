@@ -52,4 +52,5 @@ describe('HomeComponent', () => {
 })
 class FormContainerComponent {
   @Input() public formConfig: any;
+  @Input() public isDisabled?: boolean;
 }

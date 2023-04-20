@@ -6,6 +6,7 @@ export interface FormDataVal {
   toCurrency: ICurrency;
   fromCurrency: ICurrency;
   amount: number;
+  isDisableToDropdown?: boolean;
 }
 export interface ICurrency {
   val: string;
