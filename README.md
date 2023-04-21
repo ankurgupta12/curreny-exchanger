@@ -12,10 +12,10 @@ rates in all currencies according to the given value.
  ESLint, Prettier.
  
 ## Running Commands
-ng serve - To run the application in the browser|
-ng lint -  To Remove the ES linting errors|
-ng Test - To run the test cases of the application |
-ng build - To build the Application into the bundle and deploy into the server |
+`ng serve - To run the application in the browser` |
+`ng lint -  To Remove the ES linting errors`|
+`ng Test - To run the test cases of the application` |
+`ng build - To build the Application into the bundle and deploy into the server` |
  
 ## Development server
 
