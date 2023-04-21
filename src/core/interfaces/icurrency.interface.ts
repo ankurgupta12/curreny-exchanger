@@ -29,3 +29,10 @@ export interface Information {
   timestamp: number;
   rate: number;
 }
+export interface ILatest extends Information {
+  base: string;
+  rates: IRatesValue;
+}
+export interface IRatesValue {
+  [key: string]: number;
+}

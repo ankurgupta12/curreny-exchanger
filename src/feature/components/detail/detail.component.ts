@@ -15,9 +15,6 @@ import { BaseComponent } from 'src/shared/components/base.component';
 export class DetailComponent extends BaseComponent {
   public formConfig: FormDataVal;
   public title = '';
-  public basePrice: any;
-  public convertedValue: any;
-  public currencyData: any;
   constructor(private router: Router) {
     super();
     this.formConfig = this.router.getCurrentNavigation()?.extras
@@ -28,7 +25,6 @@ export class DetailComponent extends BaseComponent {
    * @param currencyList CurrencyList
    */
   public getCurrency(currencyList: ICurrency[]) {
-    console.log(currencyList);
     const selectedCurrency = currencyList.find(
       (curr) => curr.val === this.formConfig?.fromCurrency?.val
     );

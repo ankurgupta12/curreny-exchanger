@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FormDataVal } from 'src/core/interfaces/icurrency.interface';
 
 import { HomeComponent } from './home.component';
 
@@ -51,6 +52,6 @@ describe('HomeComponent', () => {
   template: '',
 })
 class FormContainerComponent {
-  @Input() public formConfig: any;
+  @Input() public formConfig: FormDataVal;
   @Input() public isDisabled?: boolean;
 }

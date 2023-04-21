@@ -6,6 +6,12 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('../feature/feature.module').then((m) => m.FeatureModule),
+    canMatch: [
+      () => {
+        // To prevent the unAuthorized user for the particular guard
+        return true;
+      },
+    ],
   },
 ];
 

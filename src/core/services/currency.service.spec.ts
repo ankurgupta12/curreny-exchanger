@@ -4,14 +4,15 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { environment } from 'src/environments/environment.development';
+import { ILatest } from '../interfaces/icurrency.interface';
 
 import { CurrencyService } from './currency.service';
 
 describe('CurrencyService', () => {
   let service: CurrencyService;
   let httpTestingController: HttpTestingController;
-  let url = environment.BASE_URL;
-  let symbols = {
+  const url = environment.BASE_URL;
+  const symbols = {
     success: true,
     symbols: {
       AED: 'United Arab Emirates Dirham',
@@ -54,7 +55,7 @@ describe('CurrencyService', () => {
     // 1
     service.getLatest({ key: 'USD', val: 'USD' }, 'USD').subscribe((res) => {
       //2
-      expect(res).toEqual({ rates: { USD: 1.2 } });
+      expect(res).toEqual({ rates: { USD: 1.2 } } as unknown as ILatest);
     });
 
     //3

@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { finalize, forkJoin, takeUntil } from 'rxjs';
 import { EUR, USD } from 'src/core/constant/currency.constant';
-import { GRID } from 'src/core/constant/global.constant';
 import { ICONS } from 'src/core/constant/icon.constant';
 import {
   FormDataVal,
@@ -88,7 +87,6 @@ export class FormContainerComponent extends BaseComponent implements OnInit {
             convertedValue &&
             `1.00${convertedValue.query.from}=${convertedValue.info.rate}${convertedValue.query.to}`;
           this.convertedValue = `${convertedValue.result}${convertedValue.query.to}`;
-          console.log(response);
           this.latestCurrencyList.next(response[1]);
         },
         error: (error) => {
@@ -118,7 +116,6 @@ export class FormContainerComponent extends BaseComponent implements OnInit {
             key: val,
             title: res.symbols[val],
           }));
-          console.log(this.currencyData, 'this.currencyData');
           this.currencyList.next(this.currencyData);
         },
         error: (error) => {

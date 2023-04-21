@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CurrencyService } from 'src/core/services/currency.service';
 import { of } from 'rxjs';
-import { IConvertData } from 'src/core/interfaces/icurrency.interface';
+import { IConvertData, ILatest } from 'src/core/interfaces/icurrency.interface';
 
 describe('FormContainerComponent', () => {
   let component: FormContainerComponent;
@@ -51,7 +51,7 @@ describe('FormContainerComponent', () => {
       } as unknown as IConvertData)
     );
     spyOn(currencyService, 'getLatest').and.returnValue(
-      of({ rates: { USD: 1.2, ALL: 1.3 } })
+      of({ rates: { USD: 1.2, ALL: 1.3 } } as unknown as ILatest)
     );
     component.convert();
     expect(component.basePrice).toBeTruthy();

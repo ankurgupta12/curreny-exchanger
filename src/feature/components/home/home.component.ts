@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { EUR, USD } from 'src/core/constant/currency.constant';
 import { GRID } from 'src/core/constant/global.constant';
 import { ICONS } from 'src/core/constant/icon.constant';
-import { FormDataVal } from 'src/core/interfaces/icurrency.interface';
+import { FormDataVal, ILatest } from 'src/core/interfaces/icurrency.interface';
 import { BaseComponent } from 'src/shared/components/base.component';
 
 @Component({
@@ -29,7 +29,6 @@ export class HomeComponent extends BaseComponent implements OnDestroy {
    * Redirect to details page
    */
   public redirectToDetail(): void {
-    console.log('Details');
     this.router.navigateByUrl('/detail', {
       state: { ...this.formData, isDisableToDropdown: true },
     });
@@ -38,18 +37,17 @@ export class HomeComponent extends BaseComponent implements OnDestroy {
    * Method to show top 9 currency
    * @param $event response from the Api for latest currency
    */
-  public getLatestCurrency($event: any) {
+  public getLatestCurrency($event: ILatest) {
     const ratesKeys = Object.keys($event.rates);
     this.latestCurrency = this.latestCurrency.map((res, index) => {
-      const val = { currencyName: '', basePrice: '' };
+      const val = { currencyName: '', basePrice: Infinity };
       val.currencyName = ratesKeys[index];
       val.basePrice = $event.rates[val.currencyName];
       return val;
     });
-    console.log(this.latestCurrency);
   }
 
-  public calculatePrice(currency: any) {
+  public calculatePrice(currency: { currencyName: string; basePrice: number }) {
     return currency?.basePrice * this.formData?.amount;
   }
 
