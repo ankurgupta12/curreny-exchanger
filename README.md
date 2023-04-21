@@ -1,10 +1,21 @@
 # CurrenyExchanger
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.It is tool to show the currency exchange rate. User Can see the
-currency information and detail information. 
+It is tool to show the currency exchange rate. User Can see the currency and detail information. With the help of this tool User can check that what is the current
+rates in all currencies according to the given value. 
+
+## Prerequistes
+ Angular 15
+ Fixer Api 
+ Node and npm should be installed in the system.
 
 ## Tools
  ESLint, Prettier.
+ 
+## Running Commands
+ng serve - To run the application in the browser
+ng lint -  To Remove the ES linting errors
+ng Test - To run the test cases of the application
+ng build - To build the Application into the bundle and deploy into the server
  
 ## Development server
 
@@ -26,6 +37,3 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
